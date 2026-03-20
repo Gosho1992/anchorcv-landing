@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AnchorCV — Evidence-Anchored Career Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0d1b2a;--navy-mid:#1a2f4a;--navy-light:#243b55;
+  --indigo:#4f46e5;--indigo-lt:#818cf8;
+  --amber:#f59e0b;--amber-lt:#fcd34d;
+  --white:#f8fafc;--muted:#94a3b8;
+  --card-bg:rgba(255,255,255,0.04);--card-border:rgba(255,255,255,0.08);
+  --radius:14px;--t:all 0.25s cubic-bezier(0.4,0,0.2,1)
+}
+body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--navy);color:var(--white);line-height:1.5;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;z-index:-2;background:
+  radial-gradient(ellipse 80% 50% at 20% -10%,rgba(79,70,229,.18) 0%,transparent 60%),
+  radial-gradient(ellipse 60% 40% at 80% 110%,rgba(245,158,11,.12) 0%,transparent 55%)}
+body::after{content:'';position:fixed;inset:0;z-index:-1;
+  background-image:linear-gradient(rgba(79,70,229,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(79,70,229,.04) 1px,transparent 1px);
+  background-size:60px 60px;pointer-events:none;animation:meshDrift 25s linear infinite}
+@keyframes meshDrift{0%{transform:translate(0,0)}100%{transform:translate(60px,60px)}}
+.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:-1}
+.orb-1{width:300px;height:300px;top:15%;left:10%;background:radial-gradient(circle,rgba(79,70,229,.15),transparent 70%);animation:floatOrb 8s ease-in-out infinite}
+.orb-2{width:250px;height:250px;bottom:20%;right:8%;background:radial-gradient(circle,rgba(245,158,11,.1),transparent 70%);animation:floatOrb 11s ease-in-out infinite reverse}
+@keyframes floatOrb{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-30px) scale(1.05)}}
+.container{max-width:1200px;margin:0 auto;padding:1.5rem 1.5rem 3rem;position:relative;z-index:1}
+
+/* LOGO */
+.logo{display:flex;align-items:center;gap:8px;margin-bottom:2rem;flex-wrap:wrap}
+.logo-icon{font-size:2.2rem;line-height:1;filter:drop-shadow(0 4px 12px rgba(79,70,229,.4))}
+.logo-text{font-size:1.6rem;font-weight:800;font-family:'Syne',sans-serif;background:linear-gradient(135deg,#818cf8,#fcd34d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-.5px}
+.live-counter{background:rgba(79,70,229,.15);border:1px solid rgba(79,70,229,.3);border-radius:40px;padding:.3rem 1rem .3rem .5rem;display:inline-flex;align-items:center;gap:.5rem;font-size:.8rem;margin-left:auto}
+.live-dot{width:8px;height:8px;background:#10b981;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* HERO */
+.hero{display:flex;flex-direction:column;gap:2rem;margin-bottom:3.5rem}
+@media(min-width:768px){.hero{flex-direction:row;align-items:center;gap:4rem}}
+.hero-content{flex:1}
+.hero h1{font-size:2.4rem;font-weight:800;line-height:1.2;letter-spacing:-.02em;font-family:'Syne',sans-serif;background:linear-gradient(135deg,#fff 0%,#818cf8 60%,#fcd34d 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem}
+@media(min-width:768px){.hero h1{font-size:3.2rem}}
+.hero p{font-size:1.1rem;color:var(--muted);margin-bottom:1.8rem;max-width:550px}
+.cta-group{display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.5rem}
+@media(min-width:480px){.cta-group{flex-direction:row;align-items:center}}
+.btn-primary{background:linear-gradient(135deg,var(--indigo) 0%,#7c3aed 100%);color:#fff;border:none;border-radius:40px;padding:.9rem 2rem;font-weight:700;font-size:1.1rem;cursor:pointer;transition:var(--t);text-decoration:none;display:inline-block;text-align:center;box-shadow:0 8px 20px rgba(79,70,229,.3);border:1px solid rgba(255,255,255,.1);width:100%}
+@media(min-width:480px){.btn-primary{width:auto}}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(79,70,229,.45)}
+.btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:40px;padding:.7rem 1.5rem;font-weight:600;font-size:.9rem;cursor:pointer;transition:var(--t);text-decoration:none;display:inline-block;text-align:center}
+.btn-outline:hover{border-color:var(--indigo);background:rgba(79,70,229,.1)}
+
+/* HERO VISUAL */
+.hero-visual{position:relative;flex-shrink:0}
+.app-mockup{width:100%;max-width:300px;border-radius:24px;border:1px solid rgba(79,70,229,.3);cursor:pointer;box-shadow:0 30px 60px rgba(0,0,0,.4)}
+.play-badge{margin-top:.75rem;text-align:center;color:var(--muted);font-size:.85rem;cursor:pointer}
+.play-badge:hover{color:#fff}
+
+/* UPLOAD SECTION */
+.upload-preview{background:var(--card-bg);border:1px solid var(--card-border);border-radius:24px;padding:2rem;margin:3rem 0;backdrop-filter:blur(5px)}
+.upload-area{border:2px dashed rgba(79,70,229,.4);border-radius:16px;padding:3rem 2rem;text-align:center;cursor:pointer;transition:var(--t);background:rgba(79,70,229,.02)}
+.upload-area:hover,.upload-area.dragover{border-color:var(--indigo);background:rgba(79,70,229,.05)}
+.upload-icon{font-size:3rem;margin-bottom:1rem;opacity:.8}
+.upload-text{color:var(--muted);margin-bottom:.5rem}
+.upload-format{font-size:.8rem;color:var(--muted)}
+.preview-area{margin-top:2rem;display:none}
+.preview-area.active{display:block}
+.preview-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.preview-filename{font-weight:600;color:var(--amber-lt)}
+.preview-stats{color:var(--muted);font-size:.8rem}
+.preview-content{background:rgba(0,0,0,.3);border-radius:12px;padding:1.5rem;max-height:300px;overflow-y:auto;font-family:monospace;font-size:.9rem;color:#e2e8f0;white-space:pre-wrap;border:1px solid var(--card-border)}
+.extracted-badge{display:inline-block;background:rgba(16,185,129,.2);border:1px solid rgba(16,185,129,.3);border-radius:4px;padding:.2rem .5rem;font-size:.7rem;color:#10b981;margin-left:.5rem}
+.backend-note{margin-top:1rem;padding:.75rem 1rem;background:rgba(79,70,229,.1);border:1px solid rgba(79,70,229,.2);border-radius:10px;font-size:.85rem;color:var(--indigo-lt);text-align:center}
+
+/* CV BUILDER DEMO */
+.cv-builder-demo{background:linear-gradient(135deg,rgba(79,70,229,.1),rgba(26,47,74,.4));border:1px solid rgba(79,70,229,.2);border-radius:24px;padding:2rem;margin:3rem 0}
+.format-selector{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem}
+.format-btn{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:40px;padding:.6rem 1.2rem;font-size:.9rem;cursor:pointer;transition:var(--t);color:var(--muted);font-family:'DM Sans',sans-serif}
+.format-btn:hover{border-color:var(--indigo);color:#fff}
+.format-btn.active{background:linear-gradient(135deg,var(--indigo),#7c3aed);color:#fff;border-color:transparent}
+.cv-preview{background:#fff;border-radius:16px;padding:2rem;color:#1e293b;box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.cv-preview h1{font-size:1.6rem;color:#0f172a;margin-bottom:.25rem;font-family:'Syne',sans-serif}
+.cv-preview h2{font-size:.85rem;text-transform:uppercase;letter-spacing:1px;color:#4f46e5;border-bottom:2px solid #4f46e5;padding-bottom:.25rem;margin:1rem 0 .5rem}
+.cv-preview p{color:#334155;margin:.25rem 0}
+.cv-preview ul{margin:.25rem 0 .5rem 1.2rem;color:#334155}
+.cv-preview .contact{color:#64748b;font-size:.85rem;margin-bottom:.5rem}
+.demo-note{text-align:center;color:var(--muted);font-size:.8rem;margin-top:1rem}
+
+/* FEATURES GRID */
+.section-header{text-align:center;margin-bottom:2.5rem}
+.section-header h2{font-size:2rem;font-weight:800;font-family:'Syne',sans-serif;background:linear-gradient(135deg,#fff,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem}
+.section-header p{color:var(--muted);font-size:1rem}
+.pillars-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-bottom:3.5rem}
+@media(min-width:640px){.pillars-grid{grid-template-columns:repeat(2,1fr)}}
+.pillar-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:20px;padding:1.8rem 1.5rem;transition:var(--t);backdrop-filter:blur(5px)}
+.pillar-card:hover{transform:translateY(-5px);border-color:rgba(79,70,229,.4);box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.pillar-icon{font-size:2.5rem;margin-bottom:1rem;display:inline-block;background:rgba(79,70,229,.1);padding:.75rem;border-radius:16px}
+.pillar-title{font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:.75rem;font-family:'Syne',sans-serif}
+.pillar-desc{color:var(--muted);font-size:.95rem;line-height:1.6}
+.pillar-quote{margin-top:1rem;font-style:italic;color:var(--amber-lt);font-size:.88rem;border-left:2px solid var(--indigo);padding-left:1rem}
+
+/* HOW IT WORKS */
+.how-it-works{display:grid;grid-template-columns:1fr;gap:1.5rem;margin:3rem 0}
+@media(min-width:768px){.how-it-works{grid-template-columns:repeat(3,1fr)}}
+.step{text-align:center;padding:1.5rem}
+.step-number{width:40px;height:40px;background:linear-gradient(135deg,var(--indigo),#7c3aed);border-radius:40px;display:flex;align-items:center;justify-content:center;font-weight:800;margin:0 auto 1rem;color:#fff}
+.step h3{font-size:1.1rem;margin-bottom:.5rem;color:#fff;font-family:'Syne',sans-serif}
+.step p{color:var(--muted);font-size:.9rem}
+
+/* TESTIMONIALS */
+.testimonials{display:grid;grid-template-columns:1fr;gap:1.5rem;margin:3rem 0}
+@media(min-width:768px){.testimonials{grid-template-columns:repeat(2,1fr)}}
+.testimonial-card{background:rgba(255,255,255,.03);border:1px solid var(--card-border);border-radius:20px;padding:1.8rem}
+.testimonial-card p{font-style:italic;color:#e2e8f0;margin-bottom:1.2rem;line-height:1.6}
+.testimonial-author{display:flex;align-items:center;gap:.75rem}
+.author-avatar{width:40px;height:40px;border-radius:40px;background:linear-gradient(135deg,var(--indigo),var(--amber));display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:.9rem}
+.author-name{font-weight:700;color:#fff;font-size:.9rem}
+.author-title{color:var(--muted);font-size:.8rem}
+
+/* SIGNUP FORM */
+.signup-form{max-width:480px;margin:2rem auto;background:rgba(255,255,255,.03);border:1px solid var(--card-border);border-radius:60px;padding:.5rem;display:flex;flex-direction:column;gap:.5rem}
+@media(min-width:500px){.signup-form{flex-direction:row}}
+.signup-form input{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:40px;padding:1rem 1.5rem;color:#fff;font-size:1rem;outline:none;transition:var(--t);font-family:'DM Sans',sans-serif}
+.signup-form input:focus{border-color:var(--indigo);box-shadow:0 0 0 3px rgba(79,70,229,.2)}
+.signup-form input::placeholder{color:var(--muted)}
+.signup-form button{background:linear-gradient(135deg,var(--indigo) 0%,#7c3aed 100%);color:#fff;border:none;border-radius:40px;padding:1rem 2rem;font-weight:700;cursor:pointer;transition:var(--t);white-space:nowrap;font-family:'DM Sans',sans-serif}
+.signup-form button:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(79,70,229,.4)}
+.form-note{text-align:center;color:var(--muted);font-size:.8rem;margin-top:.5rem}
+
+/* PRICING */
+.pricing-card{max-width:480px;margin:3rem auto;background:linear-gradient(135deg,rgba(79,70,229,.12) 0%,rgba(26,47,74,.6) 100%);border:1px solid rgba(79,70,229,.25);border-radius:32px;padding:2.5rem 2rem;text-align:center;box-shadow:0 32px 80px rgba(0,0,0,.5),0 0 0 1px rgba(79,70,229,.2);backdrop-filter:blur(10px)}
+.pricing-badge{display:inline-block;background:linear-gradient(135deg,#059669,#10b981);color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.05em;padding:4px 12px;border-radius:40px;text-transform:uppercase;margin-bottom:1rem}
+.pricing-price{font-family:'Syne',sans-serif;font-size:3.5rem;font-weight:800;color:var(--amber-lt);line-height:1;margin:.5rem 0 .25rem}
+.pricing-period{color:var(--muted);font-size:.875rem;margin-bottom:1.5rem}
+.pricing-features{text-align:left;margin:2rem 0}
+.feature-item{display:flex;align-items:center;gap:.75rem;padding:.6rem 0;color:rgba(248,250,252,.8);font-size:.95rem;border-bottom:1px solid rgba(255,255,255,.04)}
+.feature-item:last-child{border-bottom:none}
+.feature-check{color:var(--amber-lt);font-weight:700}
+.price-cta{width:100%;background:linear-gradient(135deg,var(--indigo) 0%,#7c3aed 100%);color:#fff;border:none;border-radius:40px;padding:1rem 2rem;font-weight:700;font-size:1.2rem;cursor:pointer;transition:var(--t);text-decoration:none;display:inline-block;margin-top:1rem;font-family:'DM Sans',sans-serif}
+.price-cta:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(79,70,229,.45)}
+.guarantee{font-size:.8rem;color:var(--muted);margin-top:1rem}
+
+/* FAQ */
+.faq-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin:2.5rem 0}
+@media(min-width:768px){.faq-grid{grid-template-columns:repeat(2,1fr)}}
+.faq-item{background:rgba(255,255,255,.02);border-radius:16px;padding:1.5rem}
+.faq-question{font-weight:700;color:#fff;margin-bottom:.5rem}
+.faq-answer{color:var(--muted);font-size:.9rem}
+
+/* MODAL */
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);z-index:2000;align-items:center;justify-content:center;padding:1rem}
+.modal.active{display:flex}
+.modal-content{max-width:700px;width:100%;max-height:80vh;overflow-y:auto;background:var(--navy-mid);border:1px solid rgba(79,70,229,.4);border-radius:24px;padding:2rem;box-shadow:0 30px 60px rgba(0,0,0,.6);position:relative}
+.modal-close{position:absolute;top:1rem;right:1.5rem;font-size:1.5rem;color:var(--muted);cursor:pointer;transition:var(--t)}
+.modal-close:hover{color:#fff}
+.evidence-box{background:rgba(79,70,229,.15);border-left:4px solid var(--indigo);padding:1rem;border-radius:8px;margin:1rem 0;font-family:monospace;font-size:.9rem}
+.evidence-highlight{background:rgba(245,158,11,.2);border:1px solid rgba(245,158,11,.3);border-radius:4px;padding:2px 6px;color:var(--amber-lt)}
+.gap-matrix{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
+.gap-item{background:rgba(0,0,0,.2);border-radius:12px;padding:1rem}
+.gap-met{border-left:4px solid #10b981}
+.gap-partial{border-left:4px solid #f59e0b}
+.gap-missing{border-left:4px solid #ef4444}
+
+/* STICKY CTA mobile */
+.sticky-cta{position:fixed;bottom:20px;left:20px;right:20px;background:linear-gradient(135deg,var(--indigo) 0%,#7c3aed 100%);color:#fff;border:none;border-radius:40px;padding:1rem;font-weight:700;font-size:1.1rem;cursor:pointer;box-shadow:0 10px 30px rgba(79,70,229,.5);z-index:1000;text-align:center;text-decoration:none;max-width:400px;margin:0 auto;display:none}
+@media(max-width:768px){.sticky-cta{display:block}}
+
+/* FOOTER */
+.footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.05)}
+.footer-links{display:flex;gap:1.5rem;justify-content:center;margin-bottom:1rem}
+.footer-links a{color:var(--muted);text-decoration:none;font-size:.8rem}
+.footer-links a:hover{color:#fff}
+</style>
+</head>
+<body>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<div class="container">
+
+  <!-- LOGO -->
+  <div class="logo">
+    <span class="logo-icon">⚓</span>
+    <span class="logo-text">AnchorCV</span>
+    <div class="live-counter">
+      <span class="live-dot"></span>
+      <span>Early access open</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-content">
+      <h1>The only AI that shows its work.</h1>
+      <p>Upload your resume. Get an evidence-anchored career strategy, professional CVs, and application materials you can trust. Every recommendation comes with a verbatim quote from your resume.</p>
+      <div class="cta-group">
+        <a href="#signup" class="btn-primary">Get Early Access →</a>
+        <button class="btn-outline" onclick="openModal()">🔍 See Sample Analysis</button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <!-- App screenshot mockup — inline SVG so no external dependencies -->
+      <svg width="280" height="480" viewBox="0 0 280 480" xmlns="http://www.w3.org/2000/svg" class="app-mockup" onclick="openModal()">
+        <rect width="280" height="480" rx="24" fill="#1a2f4a"/>
+        <rect x="12" y="12" width="256" height="456" rx="16" fill="#0d1b2a"/>
+        <!-- Header -->
+        <rect x="12" y="12" width="256" height="52" rx="16" fill="#1a2f4a"/>
+        <text x="28" y="44" fill="#f8fafc" font-family="sans-serif" font-size="14" font-weight="bold">⚓ AnchorCV</text>
+        <rect x="200" y="28" width="52" height="20" rx="10" fill="rgba(16,185,129,0.3)"/>
+        <text x="210" y="42" fill="#10b981" font-family="sans-serif" font-size="10" font-weight="bold">● Live</text>
+        <!-- Score card -->
+        <rect x="24" y="76" width="232" height="64" rx="12" fill="rgba(79,70,229,0.2)" stroke="rgba(79,70,229,0.4)" stroke-width="1"/>
+        <text x="36" y="100" fill="#818cf8" font-family="sans-serif" font-size="11">Overall Match</text>
+        <text x="36" y="126" fill="#fcd34d" font-family="sans-serif" font-size="28" font-weight="bold">87</text>
+        <text x="72" y="126" fill="#94a3b8" font-family="sans-serif" font-size="14">/100</text>
+        <rect x="160" y="84" width="80" height="48" rx="8" fill="rgba(0,0,0,0.3)"/>
+        <text x="170" y="104" fill="#94a3b8" font-family="sans-serif" font-size="9">Keywords</text>
+        <text x="170" y="122" fill="#4ade80" font-family="sans-serif" font-size="16" font-weight="bold">74%</text>
+        <!-- Gap matrix label -->
+        <text x="24" y="164" fill="#94a3b8" font-family="sans-serif" font-size="10" font-weight="bold" letter-spacing="1">GAP MATRIX</text>
+        <!-- Met item -->
+        <rect x="24" y="172" width="232" height="52" rx="8" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+        <rect x="24" y="172" width="4" height="52" rx="2" fill="#10b981"/>
+        <text x="36" y="192" fill="#f8fafc" font-family="sans-serif" font-size="11" font-weight="bold">✅ Master's degree in Engineering</text>
+        <text x="36" y="208" fill="#94a3b8" font-family="sans-serif" font-size="10">Evidence:</text>
+        <text x="36" y="220" fill="#818cf8" font-family="sans-serif" font-size="9">"M.E. in Bio-medical (CGPA 3.43/4)"</text>
+        <!-- Partial item -->
+        <rect x="24" y="232" width="232" height="52" rx="8" fill="rgba(245,158,11,0.1)" stroke="rgba(245,158,11,0.3)" stroke-width="1"/>
+        <rect x="24" y="232" width="4" height="52" rx="2" fill="#f59e0b"/>
+        <text x="36" y="252" fill="#f8fafc" font-family="sans-serif" font-size="11" font-weight="bold">⚠️ Machine Learning experience</text>
+        <text x="36" y="268" fill="#94a3b8" font-family="sans-serif" font-size="10">Evidence:</text>
+        <text x="36" y="280" fill="#818cf8" font-family="sans-serif" font-size="9">"Big Data Classification Model"</text>
+        <!-- Missing item -->
+        <rect x="24" y="292" width="232" height="44" rx="8" fill="rgba(239,68,68,0.1)" stroke="rgba(239,68,68,0.3)" stroke-width="1"/>
+        <rect x="24" y="292" width="4" height="44" rx="2" fill="#ef4444"/>
+        <text x="36" y="312" fill="#f8fafc" font-family="sans-serif" font-size="11" font-weight="bold">❌ TensorFlow / PyTorch</text>
+        <text x="36" y="328" fill="#94a3b8" font-family="sans-serif" font-size="10">Not evidenced in resume</text>
+        <!-- Keywords section -->
+        <text x="24" y="360" fill="#94a3b8" font-family="sans-serif" font-size="10" font-weight="bold" letter-spacing="1">MISSING KEYWORDS</text>
+        <rect x="24" y="368" width="72" height="20" rx="10" fill="rgba(245,158,11,0.2)" stroke="rgba(245,158,11,0.3)" stroke-width="1"/>
+        <text x="32" y="382" fill="#fcd34d" font-family="sans-serif" font-size="9">robotics</text>
+        <rect x="104" y="368" width="88" height="20" rx="10" fill="rgba(245,158,11,0.2)" stroke="rgba(245,158,11,0.3)" stroke-width="1"/>
+        <text x="112" y="382" fill="#fcd34d" font-family="sans-serif" font-size="9">rehabilitation</text>
+        <rect x="200" y="368" width="52" height="20" rx="10" fill="rgba(245,158,11,0.2)" stroke="rgba(245,158,11,0.3)" stroke-width="1"/>
+        <text x="208" y="382" fill="#fcd34d" font-family="sans-serif" font-size="9">sensors</text>
+        <!-- Bottom bar -->
+        <rect x="12" y="436" width="256" height="36" rx="0" fill="#1a2f4a"/>
+        <rect x="12" y="436" width="256" height="36" rx="0" fill="#1a2f4a"/>
+        <text x="52" y="459" fill="#818cf8" font-family="sans-serif" font-size="10" text-anchor="middle">Analysis</text>
+        <text x="140" y="459" fill="#94a3b8" font-family="sans-serif" font-size="10" text-anchor="middle">CV Builder</text>
+        <text x="228" y="459" fill="#94a3b8" font-family="sans-serif" font-size="10" text-anchor="middle">Files</text>
+      </svg>
+      <div class="play-badge" onclick="openModal()">▶ Click to see live analysis</div>
+    </div>
+  </div>
+
+  <!-- UPLOAD SECTION — Real Backend Connected -->
+  <div class="upload-preview">
+    <h3 style="font-family:'Syne',sans-serif;margin-bottom:.5rem;">📤 Try it free — upload your resume for a live AI analysis</h3>
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.5rem;">No signup required. See real AI analysis of your actual resume — view only. <strong style="color:var(--amber-lt);">Download & export requires premium.</strong></p>
+
+    <!-- Analysis Type Selector -->
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;" id="analysisTypeSelector">
+      <button class="format-btn active" onclick="selectAnalysisType('ATS Score & Keywords', this)">🎯 ATS Score</button>
+      <button class="format-btn" onclick="selectAnalysisType('Resume Improvement', this)">✨ Resume Improvement</button>
+      <button class="format-btn" onclick="selectAnalysisType('Cover Letter', this)">✉️ Cover Letter</button>
+      <button class="format-btn" onclick="selectAnalysisType('Email to Professor', this)">🎓 Email to Professor</button>
+    </div>
+
+    <!-- Job Description (optional) -->
+    <textarea id="jobDescInput" placeholder="Optional: paste a job description or program requirements here for targeted analysis..." style="width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:1rem;color:#e2e8f0;font-family:'DM Sans',sans-serif;font-size:.9rem;resize:vertical;min-height:80px;margin-bottom:1rem;outline:none;"></textarea>
+
+    <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+      <div class="upload-icon">📄</div>
+      <div class="upload-text">Drag &amp; drop your resume here, or click to browse</div>
+      <div class="upload-format">Supports PDF, DOCX, TXT · Max 5MB</div>
+      <input type="file" id="fileInput" accept=".pdf,.docx,.txt,image/*" style="display:none" onchange="handleFileSelect(this.files)">
+    </div>
+
+    <!-- Loading State -->
+    <div id="analysisLoading" style="display:none;text-align:center;padding:2rem;">
+      <div style="font-size:2rem;margin-bottom:1rem;animation:pulse 1.5s infinite;">⚓</div>
+      <div style="color:var(--indigo-lt);font-weight:600;" id="loadingText">Analysing your resume...</div>
+      <div style="color:var(--muted);font-size:.85rem;margin-top:.5rem;">This takes 15–30 seconds</div>
+    </div>
+
+    <!-- Result Area -->
+    <div class="preview-area" id="previewArea">
+      <div class="preview-header">
+        <div>
+          <span class="preview-filename" id="previewFilename"></span>
+          <span class="extracted-badge" id="extractedBadge">✓ Analysed</span>
+        </div>
+        <div class="preview-stats" id="previewStats"></div>
+      </div>
+
+      <!-- AI Result Display -->
+      <div id="analysisResult" style="background:rgba(0,0,0,.25);border:1px solid rgba(79,70,229,.2);border-radius:16px;padding:1.5rem;margin-top:1rem;max-height:500px;overflow-y:auto;line-height:1.7;font-size:.95rem;"></div>
+
+      <!-- Premium Gate Banner -->
+      <div style="margin-top:1.5rem;background:linear-gradient(135deg,rgba(79,70,229,.15),rgba(245,158,11,.1));border:1px solid rgba(79,70,229,.3);border-radius:16px;padding:1.5rem;text-align:center;">
+        <div style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.5rem;">🔒 Want to download or export this?</div>
+        <div style="color:var(--muted);font-size:.9rem;margin-bottom:1rem;">Get premium access — PDF export, DOCX, CV Builder, unlimited analyses.</div>
+        <a href="https://gumroad.com/l/anchorcv" target="_blank" class="btn-primary" style="padding:.8rem 2rem;display:inline-block;">Get Premium — $9 / 3 months →</a>
+      </div>
+
+      <div style="margin-top:1rem;display:flex;gap:1rem;">
+        <button class="btn-outline" style="padding:.6rem 1.2rem;" onclick="clearPreview()">Clear &amp; try another</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CV BUILDER DEMO -->
+  <div class="cv-builder-demo">
+    <h3 style="font-family:'Syne',sans-serif;margin-bottom:1.5rem;">📄 Live CV Builder — 4 formats from one resume</h3>
+    <div class="format-selector">
+      <button class="format-btn active" onclick="switchFormat('ats')" id="format-ats">ATS-Optimized</button>
+      <button class="format-btn" onclick="switchFormat('academic')" id="format-academic">Academic</button>
+      <button class="format-btn" onclick="switchFormat('europass')" id="format-europass">Europass</button>
+      <button class="format-btn" onclick="switchFormat('onepage')" id="format-onepage">One-Page</button>
+    </div>
+    <div class="cv-preview" id="cvPreview">
+      <h1>Alex Chen</h1>
+      <div class="contact">📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c5a4a9a0bdeba6ada0ab85a0a8a4aca9eba6aaa8">[email&#160;protected]</a> | 📱 +1 415 555 0192 | 🔗 linkedin.com/in/alexchen</div>
+      <h2>Professional Summary</h2>
+      <p>Biomedical Engineer with Master's degree and 4+ years of research experience. Skilled in machine learning, signal processing, and rehabilitation engineering.</p>
+      <h2>Education</h2>
+      <p><strong>MS Biomedical Engineering</strong> — Stanford University (GPA 3.8/4.0)<br>
+      <strong>BS Electrical Engineering</strong> — UC Berkeley</p>
+      <h2>Experience</h2>
+      <p><strong>Research Engineer</strong> — NeuroTech Labs (2021–Present)</p>
+      <ul>
+        <li>Developed ML pipeline for EEG signal classification (92% accuracy)</li>
+        <li>Supervised 12 undergraduate research projects in neural engineering</li>
+      </ul>
+      <h2>Publications</h2>
+      <ul>
+        <li>Chen A. et al. "Real-time EEG artifact removal using deep learning" — IEEE EMBC 2023</li>
+        <li>"Wearable EMG sensor for prosthetic control" — Journal of Neural Engineering 2022</li>
+      </ul>
+    </div>
+    <div class="demo-note">↑ Demo with sample data — your actual CV will be built from your resume content</div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="section-header">
+    <h2>What AnchorCV gives you</h2>
+    <p>Four tools in one — all grounded in evidence from your resume</p>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar-card">
+      <div class="pillar-icon">🔍</div>
+      <div class="pillar-title">Evidence-Anchored Analysis</div>
+      <div class="pillar-desc">Every recommendation comes with a verbatim quote from your resume. No hallucinations, no guesswork. See exactly why you scored what you scored.</div>
+      <div class="pillar-quote">"Showed me 7 missing keywords with exact placement suggestions."</div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">📄</div>
+      <div class="pillar-title">Multi-Format CV Builder</div>
+      <div class="pillar-desc">One resume → 4 professional formats: ATS, Academic, Europass, One-page. Color themes, tone adjustments, export as PDF or DOCX.</div>
+      <div class="pillar-quote">"Built my PhD application CV in minutes — publications formatted perfectly."</div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">🎯</div>
+      <div class="pillar-title">Application Intelligence</div>
+      <div class="pillar-desc">Gap analysis with timelines. Missing keywords with placement suggestions. Cover letters. Professor cold emails. ATS compliance checklists.</div>
+      <div class="pillar-quote">"Got an interview within 2 weeks of following the strategy."</div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon">☁️</div>
+      <div class="pillar-title">Cloud Storage & Career Hub</div>
+      <div class="pillar-desc">50 MB personal file library. All your CVs, cover letters, and analyses in one place. Access from any device, never lose a version.</div>
+      <div class="pillar-quote">"Everything in one place — saves hours when applying to multiple programs."</div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section-header">
+    <h2>How it works</h2>
+    <p>Three minutes to a stronger application</p>
+  </div>
+  <div class="how-it-works">
+    <div class="step">
+      <div class="step-number">1</div>
+      <h3>Upload your resume</h3>
+      <p>PDF, DOCX, or image. Text extracted instantly — no re-typing.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <h3>Paste a job or program</h3>
+      <p>Optional — get a targeted gap analysis against any requirement.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <h3>Get your strategy</h3>
+      <p>Gap matrix, ATS fixes, formatted CV, cover letter, and cold email — all evidence-anchored.</p>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS — dummy data -->
+  <div class="section-header">
+    <h2>Real results from real users</h2>
+    <p>Researchers, professionals, and students applying worldwide</p>
+  </div>
+  <div class="testimonials">
+    <div class="testimonial-card">
+      <p>"AnchorCV showed me my resume was missing 6 keywords the ATS was scanning for. Fixed them, got shortlisted for 3 positions in one week."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">MK</div>
+        <div>
+          <div class="author-name">M. Khalid</div>
+          <div class="author-title">Research Engineer · 5 publications</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <p>"Used the Academic CV template for my PhD application. Publications, conferences, teaching experience — all formatted correctly. Saved me two full days."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">SR</div>
+        <div>
+          <div class="author-name">S. Rahman</div>
+          <div class="author-title">Lecturer · MS Biomedical Engineering</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMAIL SIGNUP -->
+  <div class="section-header" id="signup">
+    <h2>Get early access</h2>
+    <p>Join the waitlist — we'll email you when your account is ready</p>
+  </div>
+  <form action="https://formsubmit.co/zainzia8@gmail.com" method="POST" class="signup-form" id="signupForm">
+    <input type="email" name="email" id="signup-email" placeholder="Enter your email" required>
+    <input type="hidden" name="_subject" value="New AnchorCV Early Access Signup">
+    <input type="hidden" name="_captcha" value="false">
+    <button type="submit">Notify me →</button>
+  </form>
+  <div class="form-note" id="formNote">🔒 No spam, ever. Unsubscribe any time.</div>
+
+  <!-- PRICING -->
+  <div class="pricing-card">
+    <div class="pricing-badge">Launch Special</div>
+    <div class="pricing-price">$9</div>
+    <div class="pricing-period">one-time · lifetime access</div>
+    <div class="pricing-features">
+      <div class="feature-item"><span class="feature-check">✓</span> Evidence-Anchored Analysis — unlimited</div>
+      <div class="feature-item"><span class="feature-check">✓</span> Multi-Format CV Builder — 4 templates</div>
+      <div class="feature-item"><span class="feature-check">✓</span> Application Intelligence — unlimited</div>
+      <div class="feature-item"><span class="feature-check">✓</span> 50 MB Cloud Storage — forever</div>
+      <div class="feature-item"><span class="feature-check">✓</span> Score Rationale with evidence quotes</div>
+      <div class="feature-item"><span class="feature-check">✓</span> All future updates included</div>
+    </div>
+    <!-- Replace with your Gumroad link -->
+    <a href="https://gumroad.com/l/anchorcv" class="price-cta" target="_blank">Get Lifetime Access →</a>
+    <div class="guarantee">🔒 30-day money-back guarantee · No questions asked</div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section-header"><h2>Questions? Answered.</h2></div>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <div class="faq-question">What does "evidence-anchored" mean?</div>
+      <div class="faq-answer">Every recommendation includes a direct verbatim quote from your resume. You can verify every claim. No hallucinations, no vague advice.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Do I need a job description?</div>
+      <div class="faq-answer">No. You can use AnchorCV with just your resume for a general review, ATS fixes, or a polished multi-format CV.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Is it really a one-time payment?</div>
+      <div class="faq-answer">Yes. $9 once. No subscriptions, no hidden fees. You keep access and all future updates forever.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">What file formats are supported?</div>
+      <div class="faq-answer">Upload PDF, DOCX, or images. Export as PDF, DOCX, or plain text. 50 MB cloud storage included.</div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div style="text-align:center;margin:3rem 0 2rem;">
+    <a href="#signup" class="btn-primary" style="padding:1rem 3rem;font-size:1.2rem;">Join the Waitlist — Free</a>
+    <p style="color:var(--muted);margin-top:1rem;">No credit card required.</p>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="/cdn-cgi/l/email-protection#6c160d050216050d542c0b010d0500420f0301">Contact</a>
+    </div>
+    <div>⚓ AnchorCV — Evidence-Anchored Career Intelligence</div>
+    <div style="margin-top:.5rem;">© 2026 · Built for researchers, professionals, and students</div>
+  </div>
+</div>
+
+<!-- SAMPLE ANALYSIS MODAL -->
+<div class="modal" id="analysisModal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal()">&times;</span>
+    <h2 style="font-family:'Syne',sans-serif;margin-bottom:1rem;">🔍 Sample Analysis</h2>
+    <div style="display:flex;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap;">
+      <div style="background:rgba(79,70,229,.2);border-radius:40px;padding:.2rem .8rem;font-size:.8rem;">PhD Program · Biomedical Engineering</div>
+      <div style="background:rgba(245,158,11,.2);border-radius:40px;padding:.2rem .8rem;font-size:.8rem;">87% Match</div>
+    </div>
+    <h3>📊 Gap Matrix <span style="font-size:.8rem;color:var(--muted);">(evidence-backed)</span></h3>
+    <div class="gap-matrix">
+      <div class="gap-item gap-met">
+        <div style="font-weight:700;margin-bottom:.3rem;">✅ Education</div>
+        <div style="font-size:.8rem;color:var(--muted);">Direct match</div>
+        <div class="evidence-box" style="margin:.5rem 0 0;">"M.E. in Bio-medical (CGPA 3.43/4) — NED University"</div>
+      </div>
+      <div class="gap-item gap-partial">
+        <div style="font-weight:700;margin-bottom:.3rem;">⚠️ Machine Learning</div>
+        <div style="font-size:.8rem;color:var(--muted);">Partial match</div>
+        <div class="evidence-box" style="margin:.5rem 0 0;">"Big Data Classification Model — joint project"</div>
+      </div>
+    </div>
+    <h3 style="margin-top:1.5rem;">🔑 Missing Keywords</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0;">
+      <span class="evidence-highlight">artificial intelligence</span>
+      <span class="evidence-highlight">robotics in rehabilitation</span>
+      <span class="evidence-highlight">sensor integration</span>
+      <span class="evidence-highlight">TensorFlow</span>
+    </div>
+    <h3>📝 Evidence-Anchored Rewrite</h3>
+    <div style="background:rgba(0,0,0,.2);border-radius:12px;padding:1rem;margin:1rem 0;">
+      <div style="color:var(--muted);font-size:.8rem;margin-bottom:.3rem;">BEFORE:</div>
+      <div style="color:#e2e8f0;margin-bottom:1rem;">"Supervised final year undergraduate projects"</div>
+      <div style="color:var(--muted);font-size:.8rem;margin-bottom:.3rem;">AFTER <span style="color:var(--amber-lt);">(evidence-anchored)</span>:</div>
+      <div style="color:#fff;font-weight:500;">"Mentored and guided 30+ final year undergraduate projects, achieving a 90% project completion and presentation success rate"</div>
+      <div class="evidence-box" style="margin-top:.5rem;">Evidence: "Supervised and co-supervised final year undergraduate projects"</div>
+    </div>
+    <h3>📧 AI-Generated Cold Email</h3>
+    <div style="background:rgba(0,0,0,.2);border-radius:12px;padding:1rem;">
+      <div style="color:var(--indigo-lt);">Subject: PhD Inquiry · AI & Robotics in Rehabilitation · [Name]</div>
+      <div style="margin:1rem 0;color:#e2e8f0;line-height:1.7;">
+        Dear Professor,<br><br>
+        Your lab's work on AI-driven rehabilitation systems caught my attention because my research on the D-Shoe walking dysfunction detector addresses the same intersection of biomechanics and real-time sensing.<br><br>
+        With an ME in Biomedical Engineering, 9 peer-reviewed publications, and a pending patent in medical devices, I believe I can contribute directly to your team's goals.<br><br>
+        Would you be open to a 15-minute call to explore fit?
+      </div>
+      <div style="color:var(--muted);font-size:.8rem;">← Generated in 3 seconds · grounded in real resume evidence</div>
+    </div>
+    <div style="margin-top:2rem;">
+      <a href="#signup" class="btn-primary" style="width:100%;text-align:center;display:block;" onclick="closeModal()">Try with your resume →</a>
+    </div>
+  </div>
+</div>
+
+<!-- STICKY CTA (mobile) -->
+<a href="#signup" class="sticky-cta">✨ Get Early Access →</a>
+
+<script>
+// ─── CONFIG ───────────────────────────────────────────────────────────────────
+const API_BASE = 'https://178.104.48.216/api';
+let selectedAnalysisType = 'ATS Score & Keywords';
+let uploadedFile = null;
+
+// ─── ANALYSIS TYPE ────────────────────────────────────────────────────────────
+function selectAnalysisType(type, btn) {
+  selectedAnalysisType = type;
+  document.querySelectorAll('#analysisTypeSelector .format-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ─── DRAG & DROP ──────────────────────────────────────────────────────────────
+const uploadArea = document.getElementById('uploadArea');
+function handleDragOver(e){e.preventDefault();uploadArea.classList.add('dragover')}
+function handleDragLeave(e){e.preventDefault();uploadArea.classList.remove('dragover')}
+function handleDrop(e){e.preventDefault();uploadArea.classList.remove('dragover');if(e.dataTransfer.files.length>0)processFile(e.dataTransfer.files[0])}
+function handleFileSelect(files){if(files.length>0)processFile(files[0])}
+
+// ─── MAIN PROCESS ─────────────────────────────────────────────────────────────
+async function processFile(file) {
+  if (file.size > 5 * 1024 * 1024) {
+    alert('File too large. Please upload a file under 5MB.');
+    return;
+  }
+  uploadedFile = file;
+  document.getElementById('previewFilename').textContent = file.name;
+  document.getElementById('previewStats').textContent = (file.size/1024).toFixed(1) + ' KB';
+
+  // Show loading
+  uploadArea.style.display = 'none';
+  document.getElementById('analysisLoading').style.display = 'block';
+  document.getElementById('previewArea').classList.remove('active');
+
+  const loadingMessages = [
+    'Extracting resume text...',
+    'Running AI analysis...',
+    'Anchoring evidence to your resume...',
+    'Almost done...'
+  ];
+  let msgIdx = 0;
+  const loadingInterval = setInterval(() => {
+    msgIdx = (msgIdx + 1) % loadingMessages.length;
+    document.getElementById('loadingText').textContent = loadingMessages[msgIdx];
+  }, 4000);
+
+  try {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('output_type', selectedAnalysisType);
+    formData.append('requirement_text', document.getElementById('jobDescInput').value || '');
+    formData.append('model', 'gpt-4o-mini');
+    formData.append('temperature', '0.3');
+
+    const response = await fetch(`${API_BASE}/analyse`, {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!response.ok) {
+      throw new Error(`Server error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const html = data.result_html || data.result_text || 'No result returned.';
+
+    // Show result
+    clearInterval(loadingInterval);
+    document.getElementById('analysisLoading').style.display = 'none';
+    document.getElementById('analysisResult').innerHTML = html;
+    document.getElementById('previewArea').classList.add('active');
+
+  } catch (err) {
+    clearInterval(loadingInterval);
+    document.getElementById('analysisLoading').style.display = 'none';
+    uploadArea.style.display = 'block';
+    document.getElementById('analysisResult').innerHTML = `
+      <div style="color:#f87171;padding:1rem;background:rgba(239,68,68,.1);border-radius:10px;">
+        ⚠️ Analysis failed: ${err.message}<br>
+        <span style="font-size:.85rem;color:var(--muted);">Please try again or use a different file format.</span>
+      </div>`;
+    document.getElementById('previewArea').classList.add('active');
+  }
+}
+
+function clearPreview(){
+  document.getElementById('previewArea').classList.remove('active');
+  document.getElementById('analysisResult').innerHTML = '';
+  document.getElementById('fileInput').value = '';
+  uploadArea.style.display = 'block';
+  uploadedFile = null;
+}
+
+// CV Builder format switching — dummy data (no real names)
+const dummy = {
+  name: '<h1>Alex Chen</h1><div class="contact">📧 alex.chen@email.com | 📱 +1 415 555 0192 | 🔗 linkedin.com/in/alexchen</div>',
+  edu: '<h2>Education</h2><p><strong>MS Biomedical Engineering</strong> — Stanford University (GPA 3.8/4.0)<br><strong>BS Electrical Engineering</strong> — UC Berkeley</p>',
+  exp: '<h2>Experience</h2><p><strong>Research Engineer</strong> — NeuroTech Labs (2021–Present)</p><ul><li>ML pipeline for EEG signal classification (92% accuracy)</li><li>Supervised 12 undergraduate research projects</li></ul>',
+  pubs: '<h2>Publications</h2><ul><li>Chen A. et al. "Real-time EEG artifact removal using deep learning" — IEEE EMBC 2023</li><li>"Wearable EMG sensor for prosthetic control" — Journal of Neural Engineering 2022</li></ul>',
+  skills: '<h2>Skills</h2><p><strong>Technical:</strong> Python, MATLAB, TensorFlow, Signal Processing, OpenCV<br><strong>Domain:</strong> Rehabilitation Engineering, Neuroprosthetics, Biomechanics</p>'
+};
+
+function switchFormat(f){
+  document.querySelectorAll('.format-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('format-'+f).classList.add('active');
+  const cv = document.getElementById('cvPreview');
+  if(f==='ats') cv.innerHTML=`${dummy.name}<h2>Professional Summary</h2><p>Biomedical Engineer with 4+ years of research experience in neural engineering and machine learning. Skilled in Python, TensorFlow, and biomedical signal processing.</p>${dummy.edu}${dummy.exp}${dummy.skills}${dummy.pubs}`;
+  else if(f==='academic') cv.innerHTML=`${dummy.name}<h2>Research Interests</h2><p>Neural Engineering, Rehabilitation Technology, EEG Signal Processing, Brain-Computer Interfaces</p>${dummy.edu}${dummy.pubs}<h2>Teaching</h2><p><strong>Research Supervisor</strong> — NeuroTech Labs<br>Supervised 12 undergraduate projects in neural engineering and signal processing</p>${dummy.skills}`;
+  else if(f==='europass') cv.innerHTML=`<div style="border-bottom:2px solid #4f46e5;margin-bottom:1rem;">${dummy.name}</div><div style="display:grid;grid-template-columns:1fr 2fr;gap:1rem;"><div><h2>Personal</h2><p>📧 alex.chen@email.com<br>📱 +1 415 555 0192<br>📍 San Francisco, CA<br>🌐 English (Native)<br>🌐 Mandarin (Fluent)</p></div><div>${dummy.exp}${dummy.edu}</div></div>${dummy.skills}`;
+  else cv.innerHTML=`<div style="column-count:2;column-gap:1.5rem;"><div><h1 style="font-size:1.2rem;column-span:all;">Alex Chen</h1><div class="contact" style="column-span:all;">alex.chen@email.com · +1 415 555 0192</div><h2>Profile</h2><p>Research Engineer specialising in neural engineering, ML, and rehabilitation technology.</p><h2>Education</h2><p><strong>MS Biomed Eng</strong> — Stanford (2021)<br><strong>BS EE</strong> — UC Berkeley (2019)</p></div><div><h2>Experience</h2><p><strong>Research Engineer</strong><br>NeuroTech Labs (2021–)<br>• EEG ML pipeline (92% accuracy)<br>• 12 projects supervised</p><h2>Key Skills</h2><p>Python · MATLAB · TensorFlow · Signal Processing · OpenCV</p></div></div>`;
+}
+
+// Modal
+function openModal(){document.getElementById('analysisModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('analysisModal').classList.remove('active');document.body.style.overflow=''}
+</script>
+</body>
+</html>
