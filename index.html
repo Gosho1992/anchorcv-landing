@@ -643,9 +643,11 @@ function handleFileSelect(files){if(files.length>0)processFile(files[0])}
 function renderOutput(text) {
   // Fix UTF-8 bytes misread as Latin-1 (common proxy encoding issue)
   text = text
-    .replace(/â€¢/g, '•').replace(/â€™/g, "'").replace(/â€œ/g, '\u201C')
-    .replace(/â€\u009D/g, '\u201D').replace(/â€"/g, '—').replace(/â€"/g, '–')
-    .replace(/Â·/g, '·').replace(/Ã©/g, 'é').replace(/Ã /g, 'à');
+    .replace(/â€¢/g, '•').replace(/â€º/g, '›').replace(/â€™/g, "'")
+    .replace(/â€œ/g, '\u201C').replace(/â€\u009D/g, '\u201D')
+    .replace(/â€"/g, '—').replace(/â€"/g, '–').replace(/Â·/g, '·')
+    .replace(/Ã©/g, 'é').replace(/Ã /g, 'à').replace(/Ã¨/g, 'è')
+    .replace(/â„¢/g, '™').replace(/Â©/g, '©').replace(/Â®/g, '®');
 
   // If it looks like HTML already, return as-is
   if (text.trim().startsWith('<')) return text;
@@ -655,6 +657,8 @@ function renderOutput(text) {
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/›\*(.*?)\*\*/g, '› <strong>$1</strong>')
+    .replace(/•\*(.*?)\*\*/g, '• <strong>$1</strong>')
     .replace(/\*(.*?)\*/g, '<em>$1</em>')
     .replace(/^#### (.*$)/gm, '<h4 style="color:#818cf8;margin:1rem 0 .25rem;">$1</h4>')
     .replace(/^### (.*$)/gm, '<h3 style="color:#818cf8;margin:1.2rem 0 .4rem;">$1</h3>')
