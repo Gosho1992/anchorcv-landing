@@ -22,12 +22,16 @@ body::before{content:'';position:fixed;inset:0;z-index:-2;background:
   radial-gradient(ellipse 60% 40% at 80% 110%,rgba(245,158,11,.12) 0%,transparent 55%)}
 body::after{content:'';position:fixed;inset:0;z-index:-1;
   background-image:linear-gradient(rgba(79,70,229,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(79,70,229,.04) 1px,transparent 1px);
-  background-size:60px 60px;pointer-events:none;animation:meshDrift 25s linear infinite}
-@keyframes meshDrift{0%{transform:translate(0,0)}100%{transform:translate(60px,60px)}}
+  background-size:60px 60px;pointer-events:none}
 .orb{position:fixed;border-radius:50%;pointer-events:none;z-index:-1}
-.orb-1{width:300px;height:300px;top:15%;left:10%;background:radial-gradient(circle,rgba(79,70,229,.15),transparent 70%);animation:floatOrb 8s ease-in-out infinite}
-.orb-2{width:250px;height:250px;bottom:20%;right:8%;background:radial-gradient(circle,rgba(245,158,11,.1),transparent 70%);animation:floatOrb 11s ease-in-out infinite reverse}
-@keyframes floatOrb{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-30px) scale(1.05)}}
+.orb-1{width:300px;height:300px;top:15%;left:10%;background:radial-gradient(circle,rgba(79,70,229,.15),transparent 70%)}
+.orb-2{width:250px;height:250px;bottom:20%;right:8%;background:radial-gradient(circle,rgba(245,158,11,.1),transparent 70%)}
+@media(prefers-reduced-motion:no-preference){
+  @keyframes meshDrift{0%{transform:translate(0,0)}100%{transform:translate(60px,60px)}}
+  @keyframes floatOrb{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-30px) scale(1.05)}}
+  .orb-1{animation:floatOrb 8s ease-in-out infinite}
+  .orb-2{animation:floatOrb 11s ease-in-out infinite reverse}
+}
 .container{max-width:1200px;margin:0 auto;padding:1.5rem 1.5rem 3rem;position:relative;z-index:1}
 
 /* LOGO */
@@ -60,7 +64,7 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
 .play-badge:hover{color:#fff}
 
 /* UPLOAD SECTION */
-.upload-preview{background:var(--card-bg);border:1px solid var(--card-border);border-radius:24px;padding:2rem;margin:3rem 0;backdrop-filter:blur(5px)}
+.upload-preview{background:var(--card-bg);border:1px solid var(--card-border);border-radius:24px;padding:2rem;margin:3rem 0}
 .upload-area{border:2px dashed rgba(79,70,229,.4);border-radius:16px;padding:3rem 2rem;text-align:center;cursor:pointer;transition:var(--t);background:rgba(79,70,229,.02)}
 .upload-area:hover,.upload-area.dragover{border-color:var(--indigo);background:rgba(79,70,229,.05)}
 .upload-icon{font-size:3rem;margin-bottom:1rem;opacity:.8}
@@ -95,7 +99,7 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
 .section-header p{color:var(--muted);font-size:1rem}
 .pillars-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-bottom:3.5rem}
 @media(min-width:640px){.pillars-grid{grid-template-columns:repeat(2,1fr)}}
-.pillar-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:20px;padding:1.8rem 1.5rem;transition:var(--t);backdrop-filter:blur(5px)}
+.pillar-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:20px;padding:1.8rem 1.5rem;transition:var(--t)}
 .pillar-card:hover{transform:translateY(-5px);border-color:rgba(79,70,229,.4);box-shadow:0 20px 40px rgba(0,0,0,.3)}
 .pillar-icon{font-size:2.5rem;margin-bottom:1rem;display:inline-block;background:rgba(79,70,229,.1);padding:.75rem;border-radius:16px}
 .pillar-title{font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:.75rem;font-family:'Syne',sans-serif}
@@ -131,7 +135,7 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
 .form-note{text-align:center;color:var(--muted);font-size:.8rem;margin-top:.5rem}
 
 /* PRICING */
-.pricing-card{max-width:480px;margin:3rem auto;background:linear-gradient(135deg,rgba(79,70,229,.12) 0%,rgba(26,47,74,.6) 100%);border:1px solid rgba(79,70,229,.25);border-radius:32px;padding:2.5rem 2rem;text-align:center;box-shadow:0 32px 80px rgba(0,0,0,.5),0 0 0 1px rgba(79,70,229,.2);backdrop-filter:blur(10px)}
+.pricing-card{max-width:480px;margin:3rem auto;background:linear-gradient(135deg,rgba(79,70,229,.12) 0%,rgba(26,47,74,.6) 100%);border:1px solid rgba(79,70,229,.25);border-radius:32px;padding:2.5rem 2rem;text-align:center;box-shadow:0 32px 80px rgba(0,0,0,.5),0 0 0 1px rgba(79,70,229,.2)}
 .pricing-badge{display:inline-block;background:linear-gradient(135deg,#059669,#10b981);color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.05em;padding:4px 12px;border-radius:40px;text-transform:uppercase;margin-bottom:1rem}
 .pricing-price{font-family:'Syne',sans-serif;font-size:3.5rem;font-weight:800;color:var(--amber-lt);line-height:1;margin:.5rem 0 .25rem}
 .pricing-period{color:var(--muted);font-size:.875rem;margin-bottom:1.5rem}
@@ -195,7 +199,7 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
   <div class="hero">
     <div class="hero-content">
       <h1>The only AI that shows its work.</h1>
-      <p>Upload your resume. Get an evidence-anchored career strategy, professional CVs, and application materials you can trust. Every recommendation comes with a verbatim quote from your resume.</p>
+      <p>Upload your CV. See exactly why you scored what you scored — every gap, every missing keyword, backed by a direct quote from your own resume. Then rebuild your CV in the right format for your target role or programme. No vague advice. No guessing. No copy-pasting into ChatGPT.</p>
       <div class="cta-group">
         <a href="https://178.104.48.216/login" target="_blank" class="btn-primary">Get Early Access →</a>
         <button class="btn-outline" onclick="openModal()">🔍 See Sample Analysis</button>
@@ -315,12 +319,16 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
 
   <!-- CV BUILDER DEMO -->
   <div class="cv-builder-demo">
-    <h3 style="font-family:'Syne',sans-serif;margin-bottom:1.5rem;">📄 Live CV Builder — 4 formats from one resume</h3>
-    <div class="format-selector">
+    <h3 style="font-family:'Syne',sans-serif;margin-bottom:.5rem;">📄 Live CV Builder — 4 formats from one resume</h3>
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.5rem;">Different applications need different formats. Pick yours:</p>
+    <div class="format-selector" style="margin-bottom:.75rem;">
       <button class="format-btn active" onclick="switchFormat('ats')" id="format-ats">ATS-Optimized</button>
       <button class="format-btn" onclick="switchFormat('academic')" id="format-academic">Academic</button>
       <button class="format-btn" onclick="switchFormat('europass')" id="format-europass">Europass</button>
       <button class="format-btn" onclick="switchFormat('onepage')" id="format-onepage">One-Page</button>
+    </div>
+    <div id="formatDesc" style="font-size:.85rem;color:var(--indigo-lt);margin-bottom:1.5rem;padding:.5rem 1rem;background:rgba(79,70,229,.08);border-radius:10px;border-left:3px solid var(--indigo);">
+      🎯 <strong>ATS-Optimized</strong> — UK &amp; US industry roles. Keyword-dense, clean structure that passes automated screening systems.
     </div>
     <div class="cv-preview" id="cvPreview">
       <h1>Alex Chen</h1>
@@ -441,6 +449,36 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
   </form>
   <div class="form-note" id="formNote">🔒 No spam, ever. Unsubscribe any time.</div>
 
+  <!-- VS CHATGPT -->
+  <div class="section-header" style="margin-top:3rem;">
+    <h2>AnchorCV vs ChatGPT</h2>
+    <p>Both use AI. Only one was built for this exact problem.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:3rem;max-width:700px;margin-left:auto;margin-right:auto;">
+    <div style="background:rgba(255,255,255,.03);border:1px solid var(--card-border);border-radius:20px;padding:1.5rem;">
+      <div style="font-weight:700;color:var(--muted);margin-bottom:1rem;font-size:.9rem;text-transform:uppercase;letter-spacing:.05em;">ChatGPT</div>
+      <div style="color:var(--muted);font-size:.9rem;line-height:1.8;">
+        ✗ Needs you to craft the right prompt<br>
+        ✗ Can hallucinate or invent qualifications<br>
+        ✗ Returns plain text — you format it yourself<br>
+        ✗ Generic advice, no resume evidence<br>
+        ✗ No PDF or DOCX output<br>
+        ✗ No ATS / Europass / Academic format
+      </div>
+    </div>
+    <div style="background:rgba(79,70,229,.1);border:1px solid rgba(79,70,229,.3);border-radius:20px;padding:1.5rem;">
+      <div style="font-weight:700;color:var(--amber-lt);margin-bottom:1rem;font-size:.9rem;text-transform:uppercase;letter-spacing:.05em;">⚓ AnchorCV</div>
+      <div style="color:#e2e8f0;font-size:.9rem;line-height:1.8;">
+        ✓ Just upload — no prompting needed<br>
+        ✓ Every claim backed by your resume text<br>
+        ✓ Real PDF &amp; DOCX ready to send<br>
+        ✓ Scored, structured gap analysis<br>
+        ✓ Built for international students<br>
+        ✓ ATS · Europass · Academic · One-page
+      </div>
+    </div>
+  </div>
+
   <!-- PRICING -->
   <div class="pricing-card">
     <div class="pricing-badge">Launch Special</div>
@@ -464,6 +502,10 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
   <!-- FAQ -->
   <div class="section-header"><h2>Questions? Answered.</h2></div>
   <div class="faq-grid">
+    <div class="faq-item">
+      <div class="faq-question">Why not just use ChatGPT?</div>
+      <div class="faq-answer">ChatGPT gives generic advice based on what you paste. AnchorCV does three things it can't: (1) every recommendation is backed by a verbatim quote from your actual resume — it never invents; (2) it outputs a real PDF or DOCX ready to send, not text you copy-paste and format yourself; (3) it's built specifically for international students, so it understands UK/EU/North American application systems, ATS filters, and Europass — no prompting required.</div>
+    </div>
     <div class="faq-item">
       <div class="faq-question">What does "evidence-anchored" mean?</div>
       <div class="faq-answer">Every recommendation includes a direct verbatim quote from your resume. You can verify every claim. No hallucinations, no vague advice.</div>
@@ -563,7 +605,7 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
 
 <script>
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
-const API_BASE = 'https://178.104.48.216/api';
+const API_BASE = '/api';
 const CHECKOUT_URL = 'https://anchorcv.lemonsqueezy.com/checkout/buy/bcbb0d4c-82e3-4d6c-963b-9acb87afd9d4';
 let selectedAnalysisType = 'ATS Score & Keywords';
 let uploadedFile = null;
@@ -680,9 +722,16 @@ const dummy = {
   skills: '<h2>Skills</h2><p><strong>Technical:</strong> Python, MATLAB, TensorFlow, Signal Processing, OpenCV<br><strong>Domain:</strong> Rehabilitation Engineering, Neuroprosthetics, Biomechanics</p>'
 };
 
+const formatDescriptions = {
+  ats: '🎯 <strong>ATS-Optimized</strong> — UK &amp; US industry roles. Keyword-dense, clean structure that passes automated screening systems.',
+  academic: '🎓 <strong>Academic</strong> — PhD programmes &amp; research positions. Sections for publications, conferences, teaching, and grants.',
+  europass: '🇪🇺 <strong>Europass</strong> — EU institutions, Erasmus programmes, and continental European employers. Standardised format accepted across all EU member states.',
+  onepage: '⚡ <strong>One-Page</strong> — Early-stage applications, networking, and quick rounds. Everything that matters, nothing that doesn\'t.'
+};
 function switchFormat(f){
   document.querySelectorAll('.format-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('format-'+f).classList.add('active');
+  document.getElementById('formatDesc').innerHTML = formatDescriptions[f];
   const cv = document.getElementById('cvPreview');
   if(f==='ats') cv.innerHTML=`${dummy.name}<h2>Professional Summary</h2><p>Biomedical Engineer with 4+ years of research experience in neural engineering and machine learning. Skilled in Python, TensorFlow, and biomedical signal processing.</p>${dummy.edu}${dummy.exp}${dummy.skills}${dummy.pubs}`;
   else if(f==='academic') cv.innerHTML=`${dummy.name}<h2>Research Interests</h2><p>Neural Engineering, Rehabilitation Technology, EEG Signal Processing, Brain-Computer Interfaces</p>${dummy.edu}${dummy.pubs}<h2>Teaching</h2><p><strong>Research Supervisor</strong> — NeuroTech Labs<br>Supervised 12 undergraduate projects in neural engineering and signal processing</p>${dummy.skills}`;
