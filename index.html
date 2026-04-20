@@ -3,9 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AnchorCV — Evidence-Anchored Career Intelligence</title>
+<title>AnchorCV — Evidence‑Anchored Career Intelligence + Chrome Extension</title>
+<meta name="description" content="AnchorCV: AI-powered CV analysis + Chrome extension for instant cover letters. One subscription for ATS score, CV builder, academic emails, and job application automation. Perfect for international students.">
+<meta name="keywords" content="CV builder, ATS score, Chrome extension, cover letter generator, international students, job application, scholarship, PhD application">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "AnchorCV",
+  "applicationCategory": "CareerApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "9",
+    "priceCurrency": "USD",
+    "description": "3-month access to CV analysis, builder, and Chrome extension"
+  },
+  "featureList": "ATS Score, CV Builder, Chrome Extension, Cover Letter Generator, Academic Email, Gap Analysis"
+}
+</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -147,6 +164,23 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
 .price-cta:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(79,70,229,.45)}
 .guarantee{font-size:.8rem;color:var(--muted);margin-top:1rem}
 
+/* BUNDLE SECTION (NEW) */
+.bundle-section{background:linear-gradient(135deg, rgba(79,70,229,0.15), rgba(245,158,11,0.08)); border: 1px solid rgba(79,70,229,0.4); border-radius: 32px; padding: 2rem; margin: 2rem 0; text-align: center;}
+.bundle-icon{font-size: 2rem; margin-bottom: 0.5rem;}
+.bundle-title{font-family: 'Syne', sans-serif; font-size: 1.8rem; margin-bottom: 0.5rem;}
+.bundle-desc{color: var(--muted); max-width: 600px; margin: 0 auto 1.5rem;}
+.bundle-cards{display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin-bottom: 2rem;}
+.bundle-card{background: rgba(0,0,0,0.3); border-radius: 24px; padding: 1.5rem; flex: 1; min-width: 220px; text-align: left;}
+.bundle-card-icon{font-size: 2rem;}
+.bundle-card-title{font-size: 1.2rem; margin: 0.5rem 0;}
+.bundle-list{list-style: none; padding: 0; margin: 0; color: var(--muted); font-size: 0.9rem;}
+.bundle-list li{margin: 0.3rem 0;}
+.bundle-cta{display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;}
+.bundle-note{color: var(--muted); font-size: 0.8rem; margin-top: 1rem;}
+
+/* EXTENSION PRO TIP BANNER */
+.extension-tip{background: rgba(79,70,229,0.1); border-left: 4px solid var(--indigo); border-radius: 12px; padding: 1rem; margin: 1rem 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;}
+
 /* FAQ */
 .faq-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin:2.5rem 0}
 @media(min-width:768px){.faq-grid{grid-template-columns:repeat(2,1fr)}}
@@ -206,16 +240,14 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
       </div>
     </div>
     <div class="hero-visual">
-      <!-- App screenshot mockup — inline SVG so no external dependencies -->
+      <!-- App screenshot mockup -->
       <svg width="280" height="480" viewBox="0 0 280 480" xmlns="http://www.w3.org/2000/svg" class="app-mockup" onclick="openModal()">
         <rect width="280" height="480" rx="24" fill="#1a2f4a"/>
         <rect x="12" y="12" width="256" height="456" rx="16" fill="#0d1b2a"/>
-        <!-- Header -->
         <rect x="12" y="12" width="256" height="52" rx="16" fill="#1a2f4a"/>
         <text x="28" y="44" fill="#f8fafc" font-family="sans-serif" font-size="14" font-weight="bold">⚓ AnchorCV</text>
         <rect x="200" y="28" width="52" height="20" rx="10" fill="rgba(16,185,129,0.3)"/>
         <text x="210" y="42" fill="#10b981" font-family="sans-serif" font-size="10" font-weight="bold">● Live</text>
-        <!-- Score card -->
         <rect x="24" y="76" width="232" height="64" rx="12" fill="rgba(79,70,229,0.2)" stroke="rgba(79,70,229,0.4)" stroke-width="1"/>
         <text x="36" y="100" fill="#818cf8" font-family="sans-serif" font-size="11">Overall Match</text>
         <text x="36" y="126" fill="#fcd34d" font-family="sans-serif" font-size="28" font-weight="bold">87</text>
@@ -223,26 +255,21 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
         <rect x="160" y="84" width="80" height="48" rx="8" fill="rgba(0,0,0,0.3)"/>
         <text x="170" y="104" fill="#94a3b8" font-family="sans-serif" font-size="9">Keywords</text>
         <text x="170" y="122" fill="#4ade80" font-family="sans-serif" font-size="16" font-weight="bold">74%</text>
-        <!-- Gap matrix label -->
         <text x="24" y="164" fill="#94a3b8" font-family="sans-serif" font-size="10" font-weight="bold" letter-spacing="1">GAP MATRIX</text>
-        <!-- Met item -->
         <rect x="24" y="172" width="232" height="52" rx="8" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
         <rect x="24" y="172" width="4" height="52" rx="2" fill="#10b981"/>
         <text x="36" y="192" fill="#f8fafc" font-family="sans-serif" font-size="11" font-weight="bold">✅ Master's degree in Engineering</text>
         <text x="36" y="208" fill="#94a3b8" font-family="sans-serif" font-size="10">Evidence:</text>
         <text x="36" y="220" fill="#818cf8" font-family="sans-serif" font-size="9">"M.E. in Bio-medical (CGPA 3.43/4)"</text>
-        <!-- Partial item -->
         <rect x="24" y="232" width="232" height="52" rx="8" fill="rgba(245,158,11,0.1)" stroke="rgba(245,158,11,0.3)" stroke-width="1"/>
         <rect x="24" y="232" width="4" height="52" rx="2" fill="#f59e0b"/>
         <text x="36" y="252" fill="#f8fafc" font-family="sans-serif" font-size="11" font-weight="bold">⚠️ Machine Learning experience</text>
         <text x="36" y="268" fill="#94a3b8" font-family="sans-serif" font-size="10">Evidence:</text>
         <text x="36" y="280" fill="#818cf8" font-family="sans-serif" font-size="9">"Big Data Classification Model"</text>
-        <!-- Missing item -->
         <rect x="24" y="292" width="232" height="44" rx="8" fill="rgba(239,68,68,0.1)" stroke="rgba(239,68,68,0.3)" stroke-width="1"/>
         <rect x="24" y="292" width="4" height="44" rx="2" fill="#ef4444"/>
         <text x="36" y="312" fill="#f8fafc" font-family="sans-serif" font-size="11" font-weight="bold">❌ TensorFlow / PyTorch</text>
         <text x="36" y="328" fill="#94a3b8" font-family="sans-serif" font-size="10">Not evidenced in resume</text>
-        <!-- Keywords section -->
         <text x="24" y="360" fill="#94a3b8" font-family="sans-serif" font-size="10" font-weight="bold" letter-spacing="1">MISSING KEYWORDS</text>
         <rect x="24" y="368" width="72" height="20" rx="10" fill="rgba(245,158,11,0.2)" stroke="rgba(245,158,11,0.3)" stroke-width="1"/>
         <text x="32" y="382" fill="#fcd34d" font-family="sans-serif" font-size="9">robotics</text>
@@ -250,8 +277,6 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
         <text x="112" y="382" fill="#fcd34d" font-family="sans-serif" font-size="9">rehabilitation</text>
         <rect x="200" y="368" width="52" height="20" rx="10" fill="rgba(245,158,11,0.2)" stroke="rgba(245,158,11,0.3)" stroke-width="1"/>
         <text x="208" y="382" fill="#fcd34d" font-family="sans-serif" font-size="9">sensors</text>
-        <!-- Bottom bar -->
-        <rect x="12" y="436" width="256" height="36" rx="0" fill="#1a2f4a"/>
         <rect x="12" y="436" width="256" height="36" rx="0" fill="#1a2f4a"/>
         <text x="52" y="459" fill="#818cf8" font-family="sans-serif" font-size="10" text-anchor="middle">Analysis</text>
         <text x="140" y="459" fill="#94a3b8" font-family="sans-serif" font-size="10" text-anchor="middle">CV Builder</text>
@@ -261,12 +286,19 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
     </div>
   </div>
 
-  <!-- UPLOAD SECTION — Real Backend Connected -->
+  <!-- EXTENSION PRO TIP BANNER (NEW) -->
+  <div class="extension-tip">
+    <div>
+      <strong>⚡ Pro tip:</strong> Get the <strong>Chrome extension</strong> to generate cover letters on LinkedIn & Indeed in one click.
+    </div>
+    <a href="https://chromewebstore.google.com/detail/anchorcv/eooahhhcjoelmnfbfinhbnhhdggaogbe" target="_blank" style="color: var(--amber-lt); text-decoration: none; font-weight: 600;">🧩 Add to Chrome →</a>
+  </div>
+
+  <!-- UPLOAD SECTION (unchanged) -->
   <div class="upload-preview">
     <h3 style="font-family:'Syne',sans-serif;margin-bottom:.5rem;">📤 Try it free — upload your resume for a live AI analysis</h3>
     <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.5rem;">No signup required. See real AI analysis of your actual resume — view only. <strong style="color:var(--amber-lt);">Download & export requires premium.</strong></p>
 
-    <!-- Analysis Type Selector -->
     <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;" id="analysisTypeSelector">
       <button class="format-btn active" onclick="selectAnalysisType('ATS Score & Keywords', this)">🎯 ATS Score</button>
       <button class="format-btn" onclick="selectAnalysisType('Resume Improvement', this)">✨ Resume Improvement</button>
@@ -274,7 +306,6 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
       <button class="format-btn" onclick="selectAnalysisType('Email to Professor', this)">🎓 Email to Professor</button>
     </div>
 
-    <!-- Job Description (optional) -->
     <textarea id="jobDescInput" placeholder="Optional: paste a job description or program requirements here for targeted analysis..." style="width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:1rem;color:#e2e8f0;font-family:'DM Sans',sans-serif;font-size:.9rem;resize:vertical;min-height:80px;margin-bottom:1rem;outline:none;"></textarea>
 
     <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
@@ -284,14 +315,12 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
       <input type="file" id="fileInput" accept=".pdf,.docx,.txt,image/*" style="display:none" onchange="handleFileSelect(this.files)">
     </div>
 
-    <!-- Loading State -->
     <div id="analysisLoading" style="display:none;text-align:center;padding:2rem;">
       <div style="font-size:2rem;margin-bottom:1rem;animation:pulse 1.5s infinite;">⚓</div>
       <div style="color:var(--indigo-lt);font-weight:600;" id="loadingText">Analysing your resume...</div>
       <div style="color:var(--muted);font-size:.85rem;margin-top:.5rem;">This takes 15–30 seconds</div>
     </div>
 
-    <!-- Result Area -->
     <div class="preview-area" id="previewArea">
       <div class="preview-header">
         <div>
@@ -300,24 +329,19 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
         </div>
         <div class="preview-stats" id="previewStats"></div>
       </div>
-
-      <!-- AI Result Display -->
       <div id="analysisResult" style="background:rgba(0,0,0,.25);border:1px solid rgba(79,70,229,.2);border-radius:16px;padding:1.5rem;margin-top:1rem;max-height:500px;overflow-y:auto;line-height:1.7;font-size:.95rem;"></div>
-
-      <!-- Premium Gate Banner -->
       <div style="margin-top:1.5rem;background:linear-gradient(135deg,rgba(79,70,229,.15),rgba(245,158,11,.1));border:1px solid rgba(79,70,229,.3);border-radius:16px;padding:1.5rem;text-align:center;">
         <div style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.5rem;">🔒 Want to download or export this?</div>
         <div style="color:var(--muted);font-size:.9rem;margin-bottom:1rem;">Get premium access — PDF export, DOCX, CV Builder, unlimited analyses.</div>
         <a href="https://app.anchorcv.com/login" target="_blank" class="btn-primary" style="padding:.8rem 2rem;display:inline-block;">Get Premium — $9 / 3 months →</a>
       </div>
-
       <div style="margin-top:1rem;display:flex;gap:1rem;">
         <button class="btn-outline" style="padding:.6rem 1.2rem;" onclick="clearPreview()">Clear &amp; try another</button>
       </div>
     </div>
   </div>
 
-  <!-- CV BUILDER DEMO -->
+  <!-- CV BUILDER DEMO (unchanged) -->
   <div class="cv-builder-demo">
     <h3 style="font-family:'Syne',sans-serif;margin-bottom:.5rem;">📄 Live CV Builder — 4 formats from one resume</h3>
     <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.5rem;">Different applications need different formats. Pick yours:</p>
@@ -332,7 +356,7 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
     </div>
     <div class="cv-preview" id="cvPreview">
       <h1>Alex Chen</h1>
-      <div class="contact">📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c5a4a9a0bdeba6ada0ab85a0a8a4aca9eba6aaa8">[email&#160;protected]</a> | 📱 +1 415 555 0192 | 🔗 linkedin.com/in/alexchen</div>
+      <div class="contact">📧 alex.chen@email.com | 📱 +1 415 555 0192 | 🔗 linkedin.com/in/alexchen</div>
       <h2>Professional Summary</h2>
       <p>Biomedical Engineer with Master's degree and 4+ years of research experience. Skilled in machine learning, signal processing, and rehabilitation engineering.</p>
       <h2>Education</h2>
@@ -353,7 +377,7 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
     <div class="demo-note">↑ Demo with sample data — your actual CV will be built from your resume content</div>
   </div>
 
-  <!-- FEATURES -->
+  <!-- FEATURES (unchanged) -->
   <div class="section-header">
     <h2>What AnchorCV gives you</h2>
     <p>Four tools in one — all grounded in evidence from your resume</p>
@@ -385,7 +409,7 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
     </div>
   </div>
 
-  <!-- HOW IT WORKS -->
+  <!-- HOW IT WORKS (unchanged) -->
   <div class="section-header">
     <h2>How it works</h2>
     <p>Three minutes to a stronger application</p>
@@ -408,7 +432,7 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
     </div>
   </div>
 
-  <!-- TESTIMONIALS — dummy data -->
+  <!-- TESTIMONIALS (unchanged) -->
   <div class="section-header">
     <h2>Real results from real users</h2>
     <p>Researchers, professionals, and students applying worldwide</p>
@@ -436,7 +460,7 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
     </div>
   </div>
 
-  <!-- EMAIL SIGNUP -->
+  <!-- EMAIL SIGNUP (unchanged) -->
   <div class="section-header" id="signup">
     <h2>Get early access</h2>
     <p>Join the waitlist — we'll email you when your account is ready</p>
@@ -449,7 +473,7 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
   </form>
   <div class="form-note" id="formNote">🔒 No spam, ever. Unsubscribe any time.</div>
 
-  <!-- VS CHATGPT -->
+  <!-- VS CHATGPT (unchanged) -->
   <div class="section-header" style="margin-top:3rem;">
     <h2>AnchorCV vs ChatGPT</h2>
     <p>Both use AI. Only one was built for this exact problem.</p>
@@ -479,7 +503,7 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
     </div>
   </div>
 
-  <!-- PRICING -->
+  <!-- PRICING CARD (updated: added extension feature) -->
   <div class="pricing-card">
     <div class="pricing-badge">Launch Special</div>
     <div class="pricing-price">$9</div>
@@ -491,15 +515,52 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
       <div class="feature-item"><span class="feature-check">✓</span> PDF & DOCX Export — unlimited</div>
       <div class="feature-item"><span class="feature-check">✓</span> Score Rationale with evidence quotes</div>
       <div class="feature-item"><span class="feature-check">✓</span> Full CV Builder access</div>
+      <div class="feature-item"><span class="feature-check">✓</span> Chrome Extension – instant cover letters on any job site</div>
     </div>
-    <a href="https://app.anchorcv.com/login" target="_blank" class="price-cta">Get 3-Month Access — $9 →</a>
+    <a href="https://app.anchorcv.com/login" target="_blank" class="price-cta">Get Both for $9 →</a>
     <div style="margin-top:1rem;">
-      <a href="https://app.anchorcv.com/login" target="_blank" class="btn-outline" style="display:inline-block;width:100%;text-align:center;padding:.8rem;">🛠️ Open CV Builder</a>
+      <a href="https://app.anchorcv.com/login" target="_blank" class="btn-outline" style="display:inline-block;width:100%;text-align:center;padding:.8rem;">🛠️ Open Web App</a>
     </div>
     <div class="guarantee">🔒 30-day money-back guarantee · No questions asked</div>
   </div>
 
-  <!-- FAQ -->
+  <!-- NEW BUNDLE SECTION (One subscription, two tools) -->
+  <div class="bundle-section">
+    <div class="bundle-icon">⚓ + 🧩</div>
+    <div class="bundle-title">One Subscription. Two Powerful Tools.</div>
+    <div class="bundle-desc">Whether you're applying for a <strong>scholarship, PhD, or job</strong> — AnchorCV gives you the complete toolkit.</div>
+    <div class="bundle-cards">
+      <div class="bundle-card">
+        <div class="bundle-card-icon">📱</div>
+        <div class="bundle-card-title">AnchorCV Web App</div>
+        <ul class="bundle-list">
+          <li>✓ ATS Score & Keyword Gap</li>
+          <li>✓ Multi-Format CV Builder (4 formats)</li>
+          <li>✓ Application Strategy & Gap Matrix</li>
+          <li>✓ Cover Letter / Email to Professor</li>
+          <li>✓ PDF/DOCX Export & Cloud Storage</li>
+        </ul>
+      </div>
+      <div class="bundle-card">
+        <div class="bundle-card-icon">🧩</div>
+        <div class="bundle-card-title">AnchorCV Chrome Extension</div>
+        <ul class="bundle-list">
+          <li>✓ One‑click JD capture (right‑click)</li>
+          <li>✓ Instant cover letter generation</li>
+          <li>✓ Auto‑fill into any job form</li>
+          <li>✓ Works on LinkedIn, Indeed, etc.</li>
+          <li>✓ No copy‑pasting – saves hours</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bundle-cta">
+      <a href="https://app.anchorcv.com/login" class="btn-primary" style="padding: 0.8rem 2rem;">Get Both for $9 →</a>
+      <a href="https://chromewebstore.google.com/detail/anchorcv/eooahhhcjoelmnfbfinhbnhhdggaogbe" target="_blank" class="btn-outline" style="padding: 0.8rem 2rem; display: inline-flex; align-items: center; gap: 8px;">🧩 Install Extension Free <span style="font-size: 0.8rem;">(requires premium)</span></a>
+    </div>
+    <div class="bundle-note">Extension is free to install – use 3 free cover letters/day, or upgrade to premium for unlimited.</div>
+  </div>
+
+  <!-- FAQ (unchanged) -->
   <div class="section-header"><h2>Questions? Answered.</h2></div>
   <div class="faq-grid">
     <div class="faq-item">
@@ -524,7 +585,7 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
     </div>
   </div>
 
-  <!-- FINAL CTA -->
+  <!-- FINAL CTA (unchanged) -->
   <div style="text-align:center;margin:3rem 0 2rem;">
     <a href="https://app.anchorcv.com/login" target="_blank" class="btn-primary" style="padding:1rem 3rem;font-size:1.2rem;">Get 3-Month Access — $9 →</a>
     <div style="margin-top:1rem;">
@@ -533,12 +594,13 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
     <p style="color:var(--muted);margin-top:1rem;">30-day money-back guarantee. No questions asked.</p>
   </div>
 
-  <!-- FOOTER -->
+  <!-- FOOTER (updated with extension link) -->
   <div class="footer">
     <div class="footer-links">
       <a href="#">Privacy</a>
       <a href="#">Terms</a>
       <a href="mailto:zainzia1992@gmail.com">Contact</a>
+      <a href="https://chromewebstore.google.com/detail/anchorcv/eooahhhcjoelmnfbfinhbnhhdggaogbe" target="_blank" style="color: var(--amber-lt);">🧩 Chrome Extension</a>
     </div>
     <div style="margin-top:.5rem;color:var(--muted);font-size:.8rem;">For queries and questions: <a href="mailto:zainzia1992@gmail.com" style="color:var(--indigo-lt);text-decoration:none;">zainzia1992@gmail.com</a></div>
     <div>⚓ AnchorCV — Evidence-Anchored Career Intelligence</div>
@@ -546,7 +608,7 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
   </div>
 </div>
 
-<!-- SAMPLE ANALYSIS MODAL -->
+<!-- SAMPLE ANALYSIS MODAL (unchanged) -->
 <div class="modal" id="analysisModal">
   <div class="modal-content">
     <span class="modal-close" onclick="closeModal()">&times;</span>
@@ -602,29 +664,12 @@ body::after{content:'';position:fixed;inset:0;z-index:-1;
 
 <!-- STICKY CTA (mobile) -->
 <a href="https://app.anchorcv.com/login" target="_blank" class="sticky-cta">✨ Get 3-Month Access — $9 →</a>
-<a href="https://chromewebstore.google.com/detail/anchorcv/eooahhhcjoelmnfbfinhbnhhdggaogbe" target="_blank" style="display:inline-flex;align-items:center;gap:8px;color:#94a3b8;font-size:.9rem;text-decoration:none;margin-top:.5rem;">🧩 Chrome Extension — install free, use with Premium</a>  
 
 <script>
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 const API_BASE = '/api';
-const CHECKOUT_URL = 'https://anchorcv.lemonsqueezy.com/checkout/buy/bcbb0d4c-82e3-4d6c-963b-9acb87afd9d4';
 let selectedAnalysisType = 'ATS Score & Keywords';
 let uploadedFile = null;
-
-// ─── REFERRAL TRACKING ────────────────────────────────────────────────────────
-(function() {
-  const params = new URLSearchParams(window.location.search);
-  const ref = params.get('ref');
-  if (ref) localStorage.setItem('anchorcv_ref', ref);
-})();
-
-function goToCheckout(e) {
-  if (e) e.preventDefault();
-  let url = CHECKOUT_URL;
-  const ref = localStorage.getItem('anchorcv_ref');
-  if (ref) url += '?checkout[custom][referral]=' + encodeURIComponent(ref);
-  window.open(url, '_blank');
-}
 
 // ─── ANALYSIS TYPE ────────────────────────────────────────────────────────────
 function selectAnalysisType(type, btn) {
@@ -642,7 +687,6 @@ function handleFileSelect(files){if(files.length>0)processFile(files[0])}
 
 // ─── OUTPUT RENDERER ──────────────────────────────────────────────────────────
 function renderOutput(text) {
-  // Fix UTF-8 bytes misread as Latin-1 (common proxy encoding issue)
   text = text
     .replace(/â€¢/g, '•').replace(/â€º/g, '›').replace(/â€™/g, "'")
     .replace(/â€œ/g, '\u201C').replace(/â€\u009D/g, '\u201D')
@@ -650,10 +694,8 @@ function renderOutput(text) {
     .replace(/Ã©/g, 'é').replace(/Ã /g, 'à').replace(/Ã¨/g, 'è')
     .replace(/â„¢/g, '™').replace(/Â©/g, '©').replace(/Â®/g, '®');
 
-  // If it looks like HTML already, return as-is
   if (text.trim().startsWith('<')) return text;
 
-  // Otherwise render markdown → HTML
   text = text
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
@@ -685,7 +727,6 @@ async function processFile(file) {
   document.getElementById('previewFilename').textContent = file.name;
   document.getElementById('previewStats').textContent = (file.size/1024).toFixed(1) + ' KB';
 
-  // Show loading
   uploadArea.style.display = 'none';
   document.getElementById('analysisLoading').style.display = 'block';
   document.getElementById('previewArea').classList.remove('active');
@@ -723,7 +764,6 @@ async function processFile(file) {
     const raw = data.result_html || data.result_text || 'No result returned.';
     const html = renderOutput(raw);
 
-    // Show result
     clearInterval(loadingInterval);
     document.getElementById('analysisLoading').style.display = 'none';
     document.getElementById('analysisResult').innerHTML = html;
@@ -750,7 +790,7 @@ function clearPreview(){
   uploadedFile = null;
 }
 
-// CV Builder format switching — dummy data (no real names)
+// CV Builder format switching (unchanged)
 const dummy = {
   name: '<h1>Alex Chen</h1><div class="contact">📧 alex.chen@email.com | 📱 +1 415 555 0192 | 🔗 linkedin.com/in/alexchen</div>',
   edu: '<h2>Education</h2><p><strong>MS Biomedical Engineering</strong> — Stanford University (GPA 3.8/4.0)<br><strong>BS Electrical Engineering</strong> — UC Berkeley</p>',
@@ -776,7 +816,7 @@ function switchFormat(f){
   else cv.innerHTML=`<div style="column-count:2;column-gap:1.5rem;"><div><h1 style="font-size:1.2rem;column-span:all;">Alex Chen</h1><div class="contact" style="column-span:all;">alex.chen@email.com · +1 415 555 0192</div><h2>Profile</h2><p>Research Engineer specialising in neural engineering, ML, and rehabilitation technology.</p><h2>Education</h2><p><strong>MS Biomed Eng</strong> — Stanford (2021)<br><strong>BS EE</strong> — UC Berkeley (2019)</p></div><div><h2>Experience</h2><p><strong>Research Engineer</strong><br>NeuroTech Labs (2021–)<br>• EEG ML pipeline (92% accuracy)<br>• 12 projects supervised</p><h2>Key Skills</h2><p>Python · MATLAB · TensorFlow · Signal Processing · OpenCV</p></div></div>`;
 }
 
-// Modal
+// Modal functions
 function openModal(){document.getElementById('analysisModal').classList.add('active');document.body.style.overflow='hidden'}
 function closeModal(){document.getElementById('analysisModal').classList.remove('active');document.body.style.overflow=''}
 </script>
